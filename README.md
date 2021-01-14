@@ -14,7 +14,7 @@ The steps to create a cosmos multisig wallet are explained and can be found at t
 
 ## Tradehub Multisig Process
 
-The process and explaination given from Cosmos is a good start but it isn't entirely clear how to do this without requiring each of the private keys involved. This doc is intended to make this process clear.
+The process and explanation given from Cosmos is a good start but it isn't entirely clear how to do this without requiring each of the private keys involved. This doc is intended to make this process clear.
 
 Example: Create a wallet that is a 2-of-3 multisig wallet, which means if 2 of the 3 signatures are present, the blockchain will accept the transaction and process it on their behalf. It is possible to configure this as a 3-of-3 multisig wallet as well, but that is up to the user.
 
@@ -165,7 +165,14 @@ switcheocli tx multisign \
   aliceSignature.json bobSignature.json charlieSignature.json > signedTx.json
 
 Enter keyring passphrase:
-root@054da71c3eb7:/app# switcheocli tx broadcast signedTx.json
+```
+
+10. Broadcast Multisig Transaction
+
+The `signedTx.json` file has the information necessary to be sent to the blockchain successfully, all that is left is broadcasting it to the network and getting it included into a block.
+
+```
+switcheocli tx broadcast signedTx.json
 height: 0
 txhash: 4A2693EFAF6A6BC4796A902C424F72A353222B291A10537875A30203719F9E96
 codespace: ""
@@ -178,14 +185,6 @@ gaswanted: 0
 gasused: 0
 tx: null
 timestamp: ""
-```
-
-10. Broadcast Multisig Transaction
-
-The `signedTx.json` file has the information necessary to be sent to the blockchain successfully, all that is left is broadcasting it to the network and getting it included into a block.
-
-```
-switcheocli tx broadcast signedTx.json
 ```
 
 This will generate `txhash` that you can then query the progress of via the CLI or the UI of Tradehub. At this point the transaction has been approved and funds have been moved according to the parameters set. All of this done trustlessly and fairly.
